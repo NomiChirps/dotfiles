@@ -1,1 +1,0 @@
-/home/nomi/dotfiles/nomi/.i3
