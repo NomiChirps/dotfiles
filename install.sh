@@ -7,6 +7,7 @@ DOTFILES=(
     .profile
     .vimrc
     .Xmodmap
+    .Xresources
 )
 
 for i in "${DOTFILES[@]}"; do
