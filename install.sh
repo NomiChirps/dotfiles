@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
+do_the_thing() {
+    # $1 is path to repository dir, "new"
+    # $2 is path to corresponding target dir, "old"
+    for i in "${DOTFILES[@]}"; do
+        old="$2/$i"
+        new="$1/$i"
+        if [ "$(realpath "$old")" = "$new" ]; then
+            # link matches, we already did this one
+            echo "'$old' OK"
+            continue
+        elif [ -e "$old" ]; then
+            echo "file exists: $old"
+            exit 1
+        fi
+        # $old does not exist; create a link pointing to $new
+        ln -sv "$new" "$old"
+    done
+}
+
 DOTFILES=(
     .i3
     .inputrc
@@ -9,28 +28,10 @@ DOTFILES=(
     .Xmodmap
     .Xresources
 )
+do_the_thing $PWD/nomi $HOME
 
-for i in "${DOTFILES[@]}"; do
-    old="$HOME/$i"
-    new="$PWD/nomi/$i"
-    if [ -d "$old" -a ! -h "$old" ]; then
-        echo "$old is a directory; check and remove it manually first."
-        exit 1
-    fi
-    if [ -f "$old" ] && ! diff -u "$old" "$new"; then
-        echo "$old exists with different contents; refusing to overwrite."
-        exit 1
-    fi
-    if [ "$(realpath "$old")" = "$new" ]; then
-        # link matches
-        echo "'$old' OK"
-        continue
-    fi
-    if [ -d "$new" -a -h "$old" ]; then
-        # directory already symlinked, but elsewhere
-        echo "$old exists with different contents; refusing to overwrite."
-        exit 1
-    fi
-    # destination either doesn't exist, or is a regular file with the same contents as the source. replace it.
-    cp -sfv "$PWD/nomi/$i" "$HOME/$i"
-done
+DOTFILES=(
+    i3status
+)
+do_the_thing $PWD/dot-config $HOME/.config
+
