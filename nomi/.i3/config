@@ -290,6 +290,7 @@ exec --no-startup-id conky -c $HOME/.conky/shortcuts.conf
 exec --no-startup-id xset m 0 0
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec --no-startup-id udiskie --tray --no-file-manager --terminal=terminal
 
 
 # Color palette used for the terminal ( ~/.Xresources file )

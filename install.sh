@@ -32,6 +32,7 @@ do_the_thing $PWD/nomi $HOME
 
 DOTFILES=(
     i3status
+    udiskie
 )
 do_the_thing $PWD/dot-config $HOME/.config
 
