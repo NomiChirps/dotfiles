@@ -28,6 +28,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec terminal
+bindsym $mod+Shift+Return exec terminal -title urxvt_floating
+for_window [title="urxvt_floating"] floating enable
+
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -64,9 +67,9 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id i3-scrot -dc
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -wc
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -sc
 bindsym $mod+Ctrl+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -215,7 +218,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [window_role="About"] floating enable
-
+for_window [class="discord"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
