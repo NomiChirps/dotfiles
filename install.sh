@@ -27,6 +27,8 @@ DOTFILES=(
     .vimrc
     .Xmodmap
     .Xresources
+    .gitconfig
+    .git-hooks
 )
 do_the_thing $PWD/nomi $HOME
 

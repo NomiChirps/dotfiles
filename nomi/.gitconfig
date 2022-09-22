@@ -1,0 +1,15 @@
+[user]
+    name = NomiChirps
+    email = nomi@goodkitty.club
+[alias]
+    st = status
+    co = checkout
+    br = branch
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[core]
+	hooksPath = /home/nomi/.git-hooks
