@@ -11,12 +11,28 @@ do_the_thing() {
             # link matches, we already did this one
             echo "'$old' OK"
             continue
-        elif [ -e "$old" ]; then
-            echo "file exists: $old"
+        elif [ -L "old" ]; then
+            echo "symbolic link exists: $old"
             exit 1
+        elif [ -f "$old" ]; then
+            if diff -u "$old" "$new"; then
+                # old file exists with same contents
+                ln -svf "$new" "$old"
+                continue
+            fi
+            # old file exists but with different contents
+            read -p "Apply changes? [y/N]: "
+            if [ "$REPLY" = "y" ]; then
+                ln -svf "$new" "$old"
+                continue
+            fi
+        elif [ -e "$old" ]; then
+            echo "not a regular file: $old"
+            exit 1
+        else
+            # old file doesn't exist
+            ln -sv "$new" "$old"
         fi
-        # $old does not exist; create a link pointing to $new
-        ln -sv "$new" "$old"
     done
 }
 
