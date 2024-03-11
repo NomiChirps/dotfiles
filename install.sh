@@ -21,20 +21,15 @@ do_the_thing() {
 }
 
 DOTFILES=(
-    .i3
     .inputrc
     .profile
     .vimrc
-    .Xmodmap
-    .Xresources
     .gitconfig
     .git-hooks
 )
 do_the_thing $PWD/nomi $HOME
 
 DOTFILES=(
-    i3status
-    udiskie
 )
 do_the_thing $PWD/dot-config $HOME/.config
 
