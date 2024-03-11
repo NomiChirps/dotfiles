@@ -30,6 +30,10 @@ DOTFILES=(
 do_the_thing $PWD/nomi $HOME
 
 DOTFILES=(
+    xfce4/terminal/terminalrc
+    xfce4/xfconf/xfce-perchannel-xml/accessibility.xml
+    xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+    xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
 )
 do_the_thing $PWD/dot-config $HOME/.config
 
